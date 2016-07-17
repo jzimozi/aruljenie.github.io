@@ -2,19 +2,77 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Ember started with qs.js.org</title>
-    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.1/normalize.css">
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="http://builds.emberjs.com/tags/v1.13.5/ember-template-compiler.js"></script>
-    <script src="http://builds.emberjs.com/tags/v1.13.5/ember.debug.js"></script>
+    <title>Ember started with qs.js.org</title> 
+	
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ember.js/2.6.2/ember.min.js"></script>
+	
+	
+	 
+  
+  
+	
 	  <script type="text/javascript">
 	
+	// Manually compiling "index" template and storing it into the TEMPLATES object
+Ember.TEMPLATES['Hello'] = Ember.Handlebars.compile('<h1>Hello Priya from the  template</h1>');
+
+// We do the same for "about"
+Ember.TEMPLATES['about'] = Ember.Handlebars.compile('<h1>About page for priya demo</h1>');
+
+
+// This function represents a require.js
+// statement or just an ajax call. Use
+// whatever suits you best.
+function getFiles (urls, callback) {
+  var ret = [];
+  if (!(urls instanceof Array))
+    urls = [urls];
+  urls.forEach(function (url, index) {
+    $.ajax({
+      url: url,
+      type: 'GET',
+      success: function (response) {
+      while (ret.length <= index)
+        ret.push('');
+      ret[index] = response;
+      urls.removeObject(url);
+      if (!urls.length)
+        callback.apply(null, ret);
+      }
+    });
+  });
+}
+
+// Since we can't have a project tree in
+// jsbin we will load the files from gist
+
+var indexTemplateLink = 'https://gist.githubusercontent.com/gtsop/75f704e563e140df34bd/raw/e6914d63558e3f100325d773e89714cf4b898b72/ember-template-separation-example-index';
+
+var aboutTemplateLink = 'https://gist.githubusercontent.com/gtsop/1e5cab5967610a345bc2/raw/930daf056ab64f5077d1539b0d72043c1ba4f4fd/ember-template-separation-example-about';
+ 
+// The real code should use something
+// like this instead:
+//
+// app/templates/index.hbs
+// app/templates/about.hbs
+
+
+getFiles([aboutTemplateLink],
+  function (LoadedTemplate) {
+Ember.TEMPLATES['HellowWorld'] = Ember.Handlebars.compile(LoadedTemplate);
+ 
 	App = Ember.Application.create();
 
 	App.Router.map(function (){
 	  // put your routes here
 	   this.resource("messages");
        this.resource("users");
+	   this.resource("Hello");
+       this.resource("about");
+	   this.resource("HellowWorld");
 	});
 
 	App.IndexRoute = Ember.Route.extend({
@@ -22,17 +80,43 @@
 		return ['red', 'yellow', 'blue'];
 	  }
 	});
+  }
+);
+
+ 
+
+
+	
 
 	
 	</script>
 </head>
 <body>
 
- 
-   <script type="text/x-handlebars" data-template-name="messages">
+  
+   
+  
+<script type="text/x-handlebars">
+    <h2>Welcome to Ember.js</h2>
+ <div id="nav">
+        <span>{{#linkTo "users"}}users{{/linkTo}}</span>
+        <span>{{#linkTo "messages"}}messages{{/linkTo}}</span>
+		<span>{{#linkTo "Hello"}}Hello{{/linkTo}}</span>
+        <span>{{#linkTo "about"}}about{{/linkTo}}</span>
+		
+        <span>{{#linkTo "HellowWorld"}}HellowWorld{{/linkTo}}</span>
+    </div>
+    {{outlet}}
+</script>
+
+
+
+
+
+
+  <script type="text/x-handlebars" data-template-name="messages">
     <h2>Messages</h2>
     <p>Messages Page.</p>
-     
   </script>
 
   <script type="text/x-handlebars" data-template-name="users">
@@ -40,24 +124,17 @@
     <p>Users Page.</p>
   </script>
   
-<script type="text/x-handlebars">
-    <h2>Welcome to Ember.js</h2>
- <div id="nav">
-        <span>{{#linkTo "users"}}users{{/linkTo}}</span>
-        <span>{{#linkTo "messages"}}messages{{/linkTo}}</span>
-    </div>
-    {{outlet}}
-</script>
-
-<script type="text/x-handlebars" data-template-name="index">
   
-    
+  <script type="text/x-handlebars" data-template-name="index">
     <ul>
         {{#each model as |item|}}
         <li>{{item}}</li>
         {{/each}}
     </ul>
-</script>
+  </script>
+  
+  
+
 
 </body>
 </html>
