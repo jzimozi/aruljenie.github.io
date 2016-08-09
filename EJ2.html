@@ -73,12 +73,17 @@ var aboutTemplateLink = 'https://gist.githubusercontent.com/gtsop/1e5cab5967610a
 // app/templates/index.hbs
 // app/templates/about.hbs
 
-
+/*
 getFiles([aboutTemplateLink],
   function (LoadedTemplate) {
 Ember.TEMPLATES['HellowWorld'] = Ember.Handlebars.compile(LoadedTemplate);
  
-	App = Ember.Application.create();
+
+  }
+);
+
+ */
+ 	App = Ember.Application.create();
 
 	App.Router.map(function (){
 	  // put your routes here
@@ -94,10 +99,6 @@ Ember.TEMPLATES['HellowWorld'] = Ember.Handlebars.compile(LoadedTemplate);
 		return ['red', 'yellow', 'blue'];
 	  }
 	});
-  }
-);
-
- 
 
 
 	
