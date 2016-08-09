@@ -97,12 +97,14 @@ Ember.TEMPLATES['HellowWorld'] = Ember.Handlebars.compile(LoadedTemplate);
 <script type="text/x-handlebars">
     <h2>Welcome to Ember.js</h2>
  <div id="nav">
-        <span>{{#linkTo "users"}}users{{/linkTo}}</span>
-        <span>{{#linkTo "messages"}}messages{{/linkTo}}</span>
-		<span>{{#linkTo "Hello"}}Hello{{/linkTo}}</span>
-        <span>{{#linkTo "about"}}about{{/linkTo}}</span>
-		
-        <span>{{#linkTo "HellowWorld"}}HellowWorld{{/linkTo}}</span>
+     
+                 {{link-to 'users' 'users'}}
+              {{link-to 'messages' 'messages'}}
+           {{link-to 'Hello' 'Hello'}}
+             {{link-to 'about' 'about'}}
+        {{link-to 'HellowWorld' 'HellowWorld'}}
+   
+       
     </div>
     {{outlet}}
 </script>
