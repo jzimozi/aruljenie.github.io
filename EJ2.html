@@ -8,7 +8,7 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ember.js/2.7.0/ember.debug.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ember.js/2.7.0/ember-template-compiler.js"></script>
 
-    <script type="text/javascript">
+<script type="text/javascript">
 	// Manually compiling "index" template and storing it into the TEMPLATES object
 Ember.TEMPLATES['Hello'] = Ember.Handlebars.compile('<h1>Hello Priya from the  template</h1>');
 
@@ -52,29 +52,24 @@ var aboutTemplateLink = 'https://gist.githubusercontent.com/gtsop/1e5cab5967610a
 // app/templates/index.hbs
 // app/templates/about.hbs
 
-/*
+
 getFiles([aboutTemplateLink],
   function (LoadedTemplate) {
 Ember.TEMPLATES['HellowWorld'] = Ember.Handlebars.compile(LoadedTemplate);
  
 
-  }
-);
-
- */
- 
- var App = Ember.Application.create({
-  rootElement: '#app',
-  LOG_RESOLVER: true
-});
+	 var App = Ember.Application.create({
+	  rootElement: '#app',
+	  LOG_RESOLVER: true
+	});
 
  	App.Router.map(function (){
 	  // put your routes here
-	   this.resource("messages");
+       this.resource("messages");
        this.resource("users");
-	   this.resource("Hello");
+       this.resource("Hello");
        this.resource("about");
-	 //  this.resource("HellowWorld");
+       this.resource("HellowWorld");
 	});
 
 	App.IndexRoute = Ember.Route.extend({
@@ -82,6 +77,11 @@ Ember.TEMPLATES['HellowWorld'] = Ember.Handlebars.compile(LoadedTemplate);
 		return ['red', 'yellow', 'blue'];
 	  }
 	});
+  }
+);
+
+ 
+ 
 
 
 	
@@ -97,11 +97,11 @@ Ember.TEMPLATES['HellowWorld'] = Ember.Handlebars.compile(LoadedTemplate);
 <script type="text/x-handlebars">
     <h2>Welcome to Ember.js</h2>
  <div id="nav">
-     
-                 {{link-to 'users' 'users'}}
-              {{link-to 'messages' 'messages'}}
+           {{link-to 'index' 'Home'}}
+           {{link-to 'users' 'users'}}
+           {{link-to 'messages' 'messages'}}
            {{link-to 'Hello' 'Hello'}}
-             {{link-to 'about' 'about'}}
+           {{link-to 'about' 'about'}}
        
    
        
